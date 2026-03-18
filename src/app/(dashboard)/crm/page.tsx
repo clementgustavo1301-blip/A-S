@@ -113,12 +113,12 @@ export default function CRMPage() {
         </div>
         <Button onClick={handleNewLead} className="gap-2">
           <Plus className="h-4 w-4" />
-          Novo Lead
+          Novo Cliente
         </Button>
       </div>
 
       {/* Kanban Board */}
-      <div className="flex gap-4 overflow-x-auto pb-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
         {LEAD_STATUS_ORDER.map((status) => (
           <KanbanColumn
             key={status}

@@ -11,7 +11,7 @@ const columnColors: Record<LeadStatus, string> = {
   visita_tecnica: 'bg-blue-400',
   proposta_enviada: 'bg-amber-400',
   negociacao: 'bg-orange-400',
-  aguardando_assinatura: 'bg-violet-400',
+  aguardando_assinatura: 'bg-sky-400',
   assinado: 'bg-emerald-400',
 };
 
@@ -45,30 +45,30 @@ export function KanbanColumn({ status, leads, onDragEnd, onOpenLead }: KanbanCol
 
   return (
     <div
-      className={`flex min-w-[300px] flex-col rounded-2xl border border-border/20 glass transition-all ${
-        isDragOver ? 'ring-2 ring-primary/50 bg-primary/5' : ''
+      className={`flex flex-col rounded-xl border border-border/60 bg-card transition-all ${
+        isDragOver ? 'ring-2 ring-primary/40 bg-primary/5' : ''
       }`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       {/* Column Header */}
-      <div className="flex items-center gap-2 p-4 border-b border-border/10">
-        <div className={`h-2.5 w-2.5 rounded-full ${columnColors[status]} shadow-[0_0_8px_rgba(0,0,0,0.2)]`} />
-        <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{LEAD_STATUS_LABELS[status]}</h3>
-        <Badge variant="secondary" className="ml-auto text-[10px] font-mono h-5 px-1.5 rounded-md bg-white/5 border-border/10">
+      <div className="flex items-center gap-2 p-4 border-b border-border/40">
+        <div className={`h-2.5 w-2.5 rounded-full ${columnColors[status]}`} />
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{LEAD_STATUS_LABELS[status]}</h3>
+        <Badge variant="secondary" className="ml-auto text-[10px] font-semibold h-5 px-2 rounded-md">
           {leads.length}
         </Badge>
       </div>
 
       {/* Cards */}
-      <div className="flex flex-1 flex-col gap-3 p-3 min-h-[400px]">
+      <div className="flex flex-1 flex-col gap-3 p-3 min-h-[200px]">
         {leads.map((lead) => (
           <KanbanCard key={lead.id} lead={lead} onClick={() => onOpenLead(lead)} />
         ))}
         {leads.length === 0 && (
-          <div className="flex flex-1 items-center justify-center p-4 text-[10px] font-medium uppercase tracking-widest text-muted-foreground/30 text-center">
-            Mover para esta etapa
+          <div className="flex flex-1 items-center justify-center p-4 text-xs font-medium text-muted-foreground/40 text-center">
+            Arraste leads para esta etapa
           </div>
         )}
       </div>

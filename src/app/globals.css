@@ -3,8 +3,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: var(--font-fira-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -34,6 +34,9 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
@@ -57,59 +60,79 @@
 
 @layer base {
   :root {
-    --background: oklch(0.98 0.01 230);
-    --foreground: oklch(0.2 0.04 230);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.2 0.04 230);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.2 0.04 230);
-    --primary: oklch(0.55 0.15 150); /* Nature Green Light Mode */
-    --primary-foreground: oklch(0.98 0.01 230);
-    --secondary: oklch(0.8 0.1 230); /* Air Blue */
-    --secondary-foreground: oklch(0.2 0.05 230);
-    --muted: oklch(0.96 0.02 230);
-    --muted-foreground: oklch(0.5 0.05 230);
-    --accent: oklch(0.85 0.15 90); /* Solar Yellow */
-    --accent-foreground: oklch(0.2 0.05 90);
-    --destructive: oklch(0.6 0.18 20);
-    --destructive-foreground: oklch(0.98 0.01 230);
-    --border: oklch(0.92 0.01 230);
-    --input: oklch(0.92 0.01 230);
-    --ring: oklch(0.55 0.15 150);
-    --radius: 0.5rem; /* Sharp edges for engineer-look */
+    /* A&S Energia Solar — Light Theme (White-First) */
+    --background: #FFFFFF;
+    --foreground: #1A2744;
+    --card: #FFFFFF;
+    --card-foreground: #1A2744;
+    --popover: #FFFFFF;
+    --popover-foreground: #1A2744;
+
+    /* Solar Orange — Accent Primary */
+    --primary: #F7941D;
+    --primary-foreground: #FFFFFF;
+
+    /* Light Gray — Secondary */
+    --secondary: #F1F5F9;
+    --secondary-foreground: #1B2A4A;
+
+    --muted: #F8FAFC;
+    --muted-foreground: #64748B;
+
+    /* Solar Panel Blue — Accent */
+    --accent: #3B6EA5;
+    --accent-foreground: #FFFFFF;
+
+    --destructive: #DC2626;
+    --destructive-foreground: #FFFFFF;
+
+    --border: #E2E8F0;
+    --input: #E2E8F0;
+    --ring: #F7941D;
+
+    /* Sidebar — White with subtle separation */
+    --sidebar: #FFFFFF;
+    --sidebar-foreground: #1A2744;
+
+    --radius: 0.625rem;
   }
 
   .dark {
-    /* OLED Deep Black Theme */
-    --background: oklch(0.02 0.0 0); /* #050505 True OLED Black base */
-    --foreground: oklch(0.95 0.01 230);
-    --card: oklch(0.08 0.01 230); /* Very Dark Gray/Blue for cards */
-    --card-foreground: oklch(0.95 0.01 230);
-    --popover: oklch(0.05 0.01 230);
-    --popover-foreground: oklch(0.95 0.01 230);
-    
-    /* Brand Colors - Nature Green (#2E8B57) */
-    --primary: oklch(0.6 0.15 150); 
-    --primary-foreground: oklch(0.98 0.01 230);
-    
-    /* Air Blue Secondary (#87CEEB) */
-    --secondary: oklch(0.8 0.1 230); 
-    --secondary-foreground: oklch(0.1 0.02 230);
-    
-    --muted: oklch(0.15 0.02 230);
-    --muted-foreground: oklch(0.65 0.02 230);
-    
-    /* Solar Yellow for CTA (#FFD700) */
-    --accent: oklch(0.85 0.18 90); 
-    --accent-foreground: oklch(0.1 0.02 90);
-    
-    --destructive: oklch(0.5 0.2 25);
-    --destructive-foreground: oklch(0.95 0.01 230);
-    
-    /* Crisp borders */
-    --border: oklch(0.15 0.02 230);
-    --input: oklch(0.15 0.02 230);
-    --ring: oklch(0.6 0.15 150);
+    /* A&S Energia Solar — Dark Theme (Navy, NOT OLED black) */
+    --background: #0F1729;
+    --foreground: #E8ECF2;
+    --card: #1A2744;
+    --card-foreground: #E8ECF2;
+    --popover: #1A2744;
+    --popover-foreground: #E8ECF2;
+
+    /* Solar Orange — Brand Primary */
+    --primary: #F7941D;
+    --primary-foreground: #FFFFFF;
+
+    /* Navy lighter */
+    --secondary: #243352;
+    --secondary-foreground: #E8ECF2;
+
+    --muted: #1E2F4D;
+    --muted-foreground: #94A3B8;
+
+    /* Solar Panel Blue — Accent */
+    --accent: #4A8BC2;
+    --accent-foreground: #FFFFFF;
+
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+
+    --border: #2A3D5E;
+    --input: #2A3D5E;
+    --ring: #F7941D;
+
+    /* Sidebar */
+    --sidebar: #0D1525;
+    --sidebar-foreground: #CBD5E1;
+
+    --radius: 0.625rem;
   }
 }
 
@@ -120,23 +143,13 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
-  
-  /* Engineering Typography Hierarchy */
-  h1, h2, h3, h4, h5, h6, .data-number {
-    @apply font-mono tracking-tight;
+
+  /* Clean Typography Hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    @apply tracking-tight font-semibold;
   }
-  
-  /* OLED Special Utilities */
-  .oled-card {
-    background: linear-gradient(180deg, rgba(20,20,22,1) 0%, rgba(10,10,12,1) 100%);
-    border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: 0 4px 20px -2px rgba(0,0,0,0.5);
-  }
-  
-  .glow-primary {
-    text-shadow: 0 0 10px var(--primary);
-  }
-  
+
   /* Smooth interaction standards */
   .interactive {
     @apply transition-all duration-200 cursor-pointer;

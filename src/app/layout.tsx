@@ -1,22 +1,21 @@
-import type { Metadata } from "next";
-import type { Metadata } from 'next'
-import { Fira_Code, Fira_Sans } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter, DM_Sans } from 'next/font/google';
+import './globals.css';
 
-const firaCode = Fira_Code({
-  subsets: ["latin"],
-  variable: "--font-fira-code",
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
 });
 
-const firaSans = Fira_Sans({
+const dmSans = DM_Sans({
   weight: ['300', '400', '500', '600', '700'],
-  subsets: ["latin"],
-  variable: "--font-fira-sans",
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
 });
 
 export const metadata: Metadata = {
-  title: "Antigravity - CRM Solar",
-  description: "CRM especializado e gerador de propostas para empresas de energia solar",
+  title: 'A&S Energia Solar — CRM',
+  description: 'CRM especializado e gerador de propostas para empresas de energia solar',
 };
 
 export default function RootLayout({
@@ -25,9 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark">
+    <html lang="pt-BR" suppressHydrationWarning>
       <body
-        className={`${firaCode.variable} ${firaSans.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${inter.variable} ${dmSans.variable} font-sans antialiased bg-background text-foreground`}
       >
         {children}
       </body>
