@@ -84,9 +84,9 @@ const mockProposals: (Proposal & { lead: Lead })[] = [
 
 const statusLabels: Record<string, { label: string; color: string }> = {
   rascunho: { label: 'Rascunho', color: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300' },
-  gerado: { label: 'Gerado', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300' },
-  enviado_para_assinatura: { label: 'Aguardando Assinatura', color: 'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300' },
-  assinado: { label: 'Assinado', color: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300' },
+  gerado: { label: 'Gerado', color: 'bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400' },
+  enviado_para_assinatura: { label: 'Aguardando Assinatura', color: 'bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400' },
+  assinado: { label: 'Assinado', color: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400' },
 };
 
 export default function ProposalsPage() {
@@ -174,9 +174,9 @@ export default function ProposalsPage() {
                 onClick={() => setSelectedId(p.id)}
               >
                 <CardContent className="p-4 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold text-sm">{p.lead.nome}</h3>
-                    <Badge className={`text-[10px] ${st.color}`}>{st.label}</Badge>
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="font-semibold text-sm truncate pr-2">{p.lead.nome}</h3>
+                    <Badge className={`text-[10px] shrink-0 border-transparent ${st.color}`}>{st.label}</Badge>
                   </div>
                   <div className="flex items-center justify-between text-xs text-muted-foreground">
                     <span>{p.lead.consumo_kwh} kWh/mês</span>
@@ -195,18 +195,24 @@ export default function ProposalsPage() {
           {selected ? (
             <div className="space-y-4">
               {/* Hero Section */}
-              <Card className="border-border/50 overflow-hidden">
-                <div className="bg-gradient-to-r from-primary to-blue-500 p-6 text-white">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20 backdrop-blur">
-                      <Sun className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <h2 className="text-lg font-bold">Proposta Comercial</h2>
-                      <p className="text-sm text-white/70">Sistema Fotovoltaico</p>
+              <Card className="border-border/50 overflow-hidden shadow-md">
+                <div className="bg-gradient-to-br from-primary via-primary/90 to-blue-600 p-6 sm:p-8 text-white relative overflow-hidden">
+                  {/* Decorative background circle */}
+                  <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+                  
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 relative z-10">
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md shadow-inner">
+                        <Sun className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <h2 className="text-xl font-bold tracking-tight">Proposta Comercial</h2>
+                        <p className="text-sm font-medium text-white/80">Sistema Fotovoltaico</p>
+                      </div>
                     </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-4 mt-4">
+                  
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mt-6 relative z-10 p-4 rounded-xl bg-black/10 backdrop-blur-sm border border-white/10">
                     <div>
                       <p className="text-xs text-white/60">Cliente</p>
                       <p className="font-semibold">{selected.lead.nome}</p>
@@ -224,9 +230,9 @@ export default function ProposalsPage() {
               </Card>
 
               {/* Análise Financeira */}
-              <div className="grid grid-cols-3 gap-4">
-                <Card className="border-border/50">
-                  <CardContent className="p-4 flex items-center gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2">
+                <Card className="border-border/50 shadow-sm hover:shadow-md transition-shadow">
+                  <CardContent className="p-5 flex items-center gap-4">
                     <div className="rounded-lg bg-emerald-500/10 p-2">
                       <TrendingDown className="h-5 w-5 text-emerald-500" />
                     </div>
@@ -238,8 +244,8 @@ export default function ProposalsPage() {
                     </div>
                   </CardContent>
                 </Card>
-                <Card className="border-border/50">
-                  <CardContent className="p-4 flex items-center gap-3">
+                <Card className="border-border/50 shadow-sm hover:shadow-md transition-shadow">
+                  <CardContent className="p-5 flex items-center gap-4">
                     <div className="rounded-lg bg-blue-500/10 p-2">
                       <Clock className="h-5 w-5 text-blue-500" />
                     </div>
@@ -251,8 +257,8 @@ export default function ProposalsPage() {
                     </div>
                   </CardContent>
                 </Card>
-                <Card className="border-border/50">
-                  <CardContent className="p-4 flex items-center gap-3">
+                <Card className="border-border/50 shadow-sm hover:shadow-md transition-shadow">
+                  <CardContent className="p-5 flex items-center gap-4">
                     <div className="rounded-lg bg-amber-500/10 p-2">
                       <DollarSign className="h-5 w-5 text-amber-500" />
                     </div>
@@ -318,14 +324,14 @@ export default function ProposalsPage() {
               </Card>
 
               {/* Ações */}
-              <div className="flex gap-3">
-                <Button variant="outline" className="gap-2" onClick={handleDownloadPDF}>
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <Button variant="outline" className="gap-2 sm:flex-1 h-11" onClick={handleDownloadPDF}>
                   <Download className="h-4 w-4" />
                   Baixar Resumo PDF
                 </Button>
                 {selected.status_contrato === 'rascunho' || selected.status_contrato === 'gerado' ? (
                   <Button
-                    className="gap-2 bg-emerald-600 hover:bg-emerald-700"
+                    className="gap-2 bg-emerald-600 hover:bg-emerald-700 sm:flex-[2] h-11 text-white shadow-lg shadow-emerald-500/20"
                     onClick={() => handleGenerateContract(selected.id)}
                     disabled={sendingContract}
                   >
@@ -342,10 +348,10 @@ export default function ProposalsPage() {
                     Aguardando Assinatura do Cliente
                   </Badge>
                 ) : (
-                  <Badge className="gap-2 py-2 px-4 bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300">
-                    <CheckCircle2 className="h-4 w-4" />
+                  <div className="flex items-center justify-center gap-2 py-2 px-4 rounded-md font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400 sm:flex-[2] h-11 border border-emerald-200 dark:border-emerald-500/20">
+                    <CheckCircle2 className="h-5 w-5" />
                     Contrato Assinado
-                  </Badge>
+                  </div>
                 )}
               </div>
             </div>
