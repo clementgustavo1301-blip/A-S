@@ -78,10 +78,47 @@ export function Header() {
           )}
 
           {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative h-9 w-9 rounded-full hover:bg-muted">
-            <Bell className="h-4 w-4 text-muted-foreground" />
-            <span className="absolute top-1.5 right-1.5 flex h-2 w-2 rounded-full bg-primary" />
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="relative h-9 w-9 rounded-full hover:bg-muted cursor-pointer flex items-center justify-center outline-none">
+              <Bell className="h-4 w-4 text-muted-foreground" />
+              <span className="absolute top-1.5 right-1.5 flex h-2 w-2 rounded-full bg-primary" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-80 mt-2" align="end">
+              <div className="p-3 border-b border-border">
+                <p className="text-sm font-semibold">Atualizações</p>
+                <p className="text-[11px] text-muted-foreground">Novidades do sistema</p>
+              </div>
+              <div className="p-3 space-y-3 max-h-80 overflow-y-auto">
+                {/* Today */}
+                <div>
+                  <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-2">21 de Março, 2026</p>
+                  <div className="space-y-2">
+                    <div className="flex gap-2.5 p-2 rounded-lg hover:bg-secondary/60 transition-colors">
+                      <div className="mt-0.5 h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
+                      <div>
+                        <p className="text-xs font-medium text-foreground">Layout Mobile Otimizado</p>
+                        <p className="text-[11px] text-muted-foreground">Sidebar mobile com drawer, kanban responsivo e formulários adaptados para telas pequenas.</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2.5 p-2 rounded-lg hover:bg-secondary/60 transition-colors">
+                      <div className="mt-0.5 h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
+                      <div>
+                        <p className="text-xs font-medium text-foreground">Modo Escuro</p>
+                        <p className="text-[11px] text-muted-foreground">Novo tema dark navy com toggle no header. Todas as páginas compatíveis.</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2.5 p-2 rounded-lg hover:bg-secondary/60 transition-colors">
+                      <div className="mt-0.5 h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
+                      <div>
+                        <p className="text-xs font-medium text-foreground">Precificação Mobile</p>
+                        <p className="text-[11px] text-muted-foreground">Barra de resumo compacta com detalhes expansíveis para melhor visualização no celular.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <Separator orientation="vertical" className="h-5 hidden sm:block" />
 
