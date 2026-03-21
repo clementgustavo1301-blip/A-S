@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useSidebar } from '@/components/layout/sidebar-context';
 import { cn } from '@/lib/utils';
 import {
@@ -32,6 +32,7 @@ import {
   CheckCircle2,
   Plus,
   Trash2,
+  ChevronUp,
 } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 import type { Lead } from '@/types';
@@ -70,6 +71,8 @@ export default function PricingPage() {
   const [margemLucro, setMargemLucro] = useState(30);
   const [comissao, setComissao] = useState(5);
   const [saved, setSaved] = useState(false);
+  const [mobileDetailsOpen, setMobileDetailsOpen] = useState(false);
+  const toggleMobileDetails = useCallback(() => setMobileDetailsOpen((v) => !v), []);
 
   const selectedLead = mockLeads.find((l) => l.id === selectedLeadId);
 
@@ -318,10 +321,92 @@ export default function PricingPage() {
           "left-0 md:left-24",
           isExpanded && "md:left-64"
         )}>
-          <div className="p-4">
-            <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-6">
+          {/* ===== MOBILE BOTTOM BAR ===== */}
+          <div className="md:hidden">
+            {/* Expandable details */}
+            {mobileDetailsOpen && (
+              <div className="p-3 border-b border-border/50 space-y-3">
+                {/* Cost breakdown */}
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <span className="text-muted-foreground">Kit</span>
+                    <p className="font-semibold">{formatCurrency(custoKit)}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Frete</span>
+                    <p className="font-semibold">{formatCurrency(custoFrete)}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Engenharia</span>
+                    <p className="font-semibold">{formatCurrency(custoEngenharia)}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Mão de Obra</span>
+                    <p className="font-semibold">{formatCurrency(custoMaoObra)}</p>
+                  </div>
+                </div>
+                <Separator />
+                {/* Margin inputs */}
+                <div className="flex items-center gap-3">
+                  <div className="space-y-1 flex-1">
+                    <Label className="text-xs">Margem %</Label>
+                    <Input
+                      type="number"
+                      min={0}
+                      max={100}
+                      value={margemLucro}
+                      onChange={(e) => { setMargemLucro(parseFloat(e.target.value) || 0); setSaved(false); }}
+                      className="h-9 text-center text-xs"
+                    />
+                  </div>
+                  <div className="space-y-1 flex-1">
+                    <Label className="text-xs">Comissão %</Label>
+                    <Input
+                      type="number"
+                      min={0}
+                      max={100}
+                      value={comissao}
+                      onChange={(e) => { setComissao(parseFloat(e.target.value) || 0); setSaved(false); }}
+                      className="h-9 text-center text-xs"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Compact row: price + expand + save */}
+            <div className="flex items-center justify-between gap-3 p-3">
+              <button
+                onClick={toggleMobileDetails}
+                className="p-2 rounded-lg hover:bg-secondary transition-colors cursor-pointer"
+                aria-label={mobileDetailsOpen ? 'Esconder detalhes' : 'Ver detalhes'}
+              >
+                <ChevronUp className={cn(
+                  "h-4 w-4 text-muted-foreground transition-transform duration-200",
+                  !mobileDetailsOpen && "rotate-180"
+                )} />
+              </button>
+              <div className="flex-1 text-center">
+                <span className="text-[10px] text-muted-foreground block">Preço Final</span>
+                <p className="text-lg font-bold text-primary leading-tight">{formatCurrency(precoFinalVenda)}</p>
+                {economiaAnual > 0 && (
+                  <p className="text-[9px] text-muted-foreground">
+                    Payback ~{paybackMeses.toFixed(0)}m
+                  </p>
+                )}
+              </div>
+              <Button onClick={handleSave} size="sm" className="gap-1.5 h-9" disabled={custoBaseTotal === 0}>
+                {saved ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Save className="h-3.5 w-3.5" />}
+                {saved ? 'Salvo!' : 'Salvar'}
+              </Button>
+            </div>
+          </div>
+
+          {/* ===== DESKTOP BOTTOM BAR (unchanged) ===== */}
+          <div className="hidden md:block p-4">
+            <div className="flex items-end gap-6">
               {/* Cost breakdown */}
-              <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+              <div className="flex-1 grid grid-cols-4 gap-3 text-xs">
                 <div>
                   <span className="text-muted-foreground">Kit</span>
                   <p className="font-semibold">{formatCurrency(custoKit)}</p>
