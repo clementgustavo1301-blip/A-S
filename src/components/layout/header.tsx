@@ -114,6 +114,13 @@ export function Header() {
                         <p className="text-[11px] text-muted-foreground">Barra de resumo compacta com detalhes expansíveis para melhor visualização no celular.</p>
                       </div>
                     </div>
+                    <div className="flex gap-2.5 p-2 rounded-lg hover:bg-secondary/60 transition-colors">
+                      <div className="mt-0.5 h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
+                      <div>
+                        <p className="text-xs font-medium text-foreground">Propostas Renovadas</p>
+                        <p className="text-[11px] text-muted-foreground">Novo visual com glassmorphism e cards financeiros em formato grid responsivo para telas pequenas.</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
