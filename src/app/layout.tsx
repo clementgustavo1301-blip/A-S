@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, DM_Sans } from 'next/font/google';
+import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 const inter = Inter({
@@ -28,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${dmSans.variable} font-sans antialiased bg-background text-foreground`}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

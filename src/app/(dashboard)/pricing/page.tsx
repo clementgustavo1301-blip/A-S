@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useSidebar } from '@/components/layout/sidebar-context';
+import { cn } from '@/lib/utils';
 import {
   Card,
   CardContent,
@@ -171,7 +172,7 @@ export default function PricingPage() {
 
       {/* Category Selector + Items */}
       {selectedLeadId && (
-        <div className="grid lg:grid-cols-[280px_1fr] gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
           {/* Category Tabs */}
           <Card className="border-border/50">
             <CardHeader className="pb-3">
@@ -251,7 +252,7 @@ export default function PricingPage() {
               ) : (
                 <div className="space-y-3">
                   {/* Column Headers */}
-                  <div className="grid grid-cols-[1fr_140px_80px_40px] gap-3 px-1 text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
+                  <div className="hidden sm:grid grid-cols-[1fr_140px_80px_40px] gap-3 px-1 text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
                     <span>Descrição</span>
                     <span>Valor (R$)</span>
                     <span>Qtd</span>
@@ -261,7 +262,7 @@ export default function PricingPage() {
                   {itensDaCategoria.map((item) => (
                     <div
                       key={item.id}
-                      className="grid grid-cols-[1fr_140px_80px_40px] gap-3 items-center p-3 rounded-lg border border-border/50 bg-secondary/30 hover:border-border transition-colors"
+                      className="grid grid-cols-2 sm:grid-cols-[1fr_140px_80px_40px] gap-3 items-center p-3 rounded-lg border border-border/50 bg-secondary/30 hover:border-border transition-colors"
                     >
                       <Input
                         placeholder="Ex: Inversor 5kW, Módulo 550W..."
@@ -312,11 +313,15 @@ export default function PricingPage() {
 
       {/* Bottom Bar - Fixed */}
       {selectedLeadId && (
-        <div className="fixed bottom-0 right-0 z-50 border-t border-border bg-white shadow-[0_-4px_20px_rgba(0,0,0,0.06)] transition-all duration-300" style={{ left: isExpanded ? 256 : 96 }}>
+        <div className={cn(
+          "fixed bottom-0 right-0 z-50 border-t border-border bg-background shadow-[0_-4px_20px_rgba(0,0,0,0.06)] transition-all duration-300",
+          "left-0 md:left-24",
+          isExpanded && "md:left-64"
+        )}>
           <div className="p-4">
-            <div className="flex items-end gap-6">
+            <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-6">
               {/* Cost breakdown */}
-              <div className="flex-1 grid grid-cols-4 gap-3 text-xs">
+              <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                 <div>
                   <span className="text-muted-foreground">Kit</span>
                   <p className="font-semibold">{formatCurrency(custoKit)}</p>

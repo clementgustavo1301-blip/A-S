@@ -104,10 +104,10 @@ export default function CRMPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">CRM - Pipeline</h1>
-          <p className="text-sm text-muted-foreground">
+          <h1 className="text-xl md:text-2xl font-bold tracking-tight">CRM - Pipeline</h1>
+          <p className="text-xs md:text-sm text-muted-foreground">
             Arraste os cards para mover leads entre etapas
           </p>
         </div>
@@ -118,7 +118,7 @@ export default function CRMPage() {
       </div>
 
       {/* Kanban Board */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
         {LEAD_STATUS_ORDER.map((status) => (
           <KanbanColumn
             key={status}
